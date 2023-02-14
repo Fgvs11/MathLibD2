@@ -33,6 +33,7 @@ public class Calculadora{
                     System.out.print("El resultado es completo es : " + raiz);
                     break;
                 case 2: // Seno (x)
+                    
                     break;
                 case  3: // Coseno (x)
                     break;

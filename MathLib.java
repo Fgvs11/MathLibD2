@@ -1,9 +1,9 @@
 public class MathLib{
-    double resultado, es,ea, resulRaiz = 1, aux =1;
+    private double resultado, es,ea, resulRaiz = 1, aux =1;
     //char resultadoChar[] = new char[10];
-    int exponente;
+    private int exponente;
 
-
+    //Metodos auxiliares
     public double exponente(double valor, int exp) {
         resultado = 1;
         for (int i = 1; i <= exp; i++){
@@ -15,10 +15,21 @@ public class MathLib{
        exponente = exp;
         return resultado;
     }
+    
+    public int factorial(int numero){
+	   if(numero == 0){
+		   return 1;
+	   }
+	   return numero * factorial(numero - 1);
+    }
+    
+    public double conGR(double grados){ //Convertir grados a radianes
+        return grados * 3.14159265358979323846264338327950288/180;
+    }
+
     public void errorMeta(int cifraSig) {
         es = 0.5*(exponente(10,cifraSig-2));
     }
-
     public double errorPorcentual(double acutal, double anterior) {
         ea = ((acutal-anterior)/acutal)*100;
         if (ea < 0) {
@@ -27,6 +38,8 @@ public class MathLib{
         return ea;
     }
 
+   
+    //Metodos de alexius
     public double raizCuadrada(double numero){
         do {
             resulRaiz = 0.5*(resulRaiz + numero/resulRaiz);
