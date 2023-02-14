@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Calculadora{
@@ -5,7 +6,9 @@ public class Calculadora{
 
         // Declaracion de variables-objetos
         Scanner leer = new Scanner(System.in);
+        MathLib math = new MathLib();
         int opc;
+        double raiz;
 
         // Menu MathLibs
         do {
@@ -22,6 +25,12 @@ public class Calculadora{
 
             switch (opc) {
                 case 1: // Raiz cuadrada de x
+                    System.out.print("Ingrese las cifras significativas deseadas: ");
+                    math.errorMeta(leer.nextInt());
+                    System.out.print("Ingrese el numero a calular: ");
+                    raiz = math.raizCuadrada(leer.nextDouble());
+                    //System.out.println("El resultado es: " + Arrays.toString(math.convertir()));
+                    System.out.print("El resultado es completo es : " + raiz);
                     break;
                 case 2: // Seno (x)
                     break;
