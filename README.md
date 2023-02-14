@@ -1,5 +1,5 @@
 # MathLibD2
-Calculadora Alexius
+Calculadora Alexius hola
 Desarrollar programa MathLib para calcular:
 - Raiz cuadrada de x
 - Seno(x)
