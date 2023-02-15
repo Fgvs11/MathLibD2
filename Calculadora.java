@@ -8,7 +8,7 @@ public class Calculadora{
         Scanner leer = new Scanner(System.in);
         MathLib math = new MathLib();
         int opc;
-        double raiz;
+        double raiz, euler, seno;
 
         // Menu MathLibs
         do {
@@ -29,11 +29,14 @@ public class Calculadora{
                     math.errorMeta(leer.nextInt());
                     System.out.print("Ingrese el numero a calular: ");
                     raiz = math.raizCuadrada(leer.nextDouble());
-                    //System.out.println("El resultado es: " + Arrays.toString(math.convertir()));
-                    System.out.print("El resultado es completo es : " + raiz);
+                    System.out.println("El resultado es: " + raiz);
                     break;
                 case 2: // Seno (x)
-                    
+                    System.out.print("Ingrese las cifras significativas deseadas: ");
+                    math.errorMeta(leer.nextInt());
+                    System.out.print("Ingrese los grados del seno: ");
+                    seno = math.seno(leer.nextDouble());
+                    System.out.println("El resultado es: " + seno);
                     break;
                 case  3: // Coseno (x)
                     System.out.print("Ingrese el angulo del coseno: ");
@@ -55,6 +58,11 @@ public class Calculadora{
                 case  4: // Tangente (x)
                     break;
                 case  5: // e^x
+                    System.out.print("Ingrese las cifras significativas deseadas: ");
+                    math.errorMeta(leer.nextInt());
+                    System.out.print("Ingrese el exponente a calcular de e: ");
+                    euler = math.euler(leer.nextDouble());
+                    System.out.println("El resultado es: " + euler);
                     break;
                 case  6: // Ln(x)
                     break;

@@ -1,18 +1,24 @@
+
 public class MathLib{
-    private double resultado, es,ea, resulRaiz = 1, aux =1;
-    //char resultadoChar[] = new char[10];
-    private int exponente;
+    private double es;
+    private double ea;
+    private double resulRaiz = 1;
+    private double aux =1;
+    private double resultadoEuler;
+    private double radianes;
+    private boolean auxSeno;
+    private int t;
 
     //Metodos auxiliares
     public double exponente(double valor, int exp) {
-        resultado = 1;
+        double resultado = 1;
+
         for (int i = 1; i <= exp; i++){
             resultado = resultado * valor;
         }
        if (valor==10) {
-            return 1/resultado;
+            return 1/ resultado;
         }
-       exponente = exp;
         return resultado;
     }
     
@@ -56,21 +62,57 @@ public class MathLib{
         do {
             resulRaiz = 0.5*(resulRaiz + numero/resulRaiz);
             ea = errorPorcentual(resulRaiz,aux);
-            aux = resulRaiz;;
+            aux = resulRaiz;
             if (ea < es) {
                 return resulRaiz;
             }
         }while(true);
     }
 
-    /* public char[] convertir() {
-        for (int i = 0; i <= exponente; i++) {
-            resultadoChar[i] = (String.valueOf(resulRaiz).charAt(i));
-        }
-        return resultadoChar;
+    public double euler(double numero) {
+        resultadoEuler = 1 + numero;
+        t = 2;
+        do {
+            resultadoEuler += (exponente(numero,t))/factorial(t);
+            ea = errorPorcentual(resultadoEuler,aux);
+            System.out.println("ea = " + ea);
+            aux = resultadoEuler;
+            t++;
+            if (ea < es) {
+                return resultadoEuler;
+            }
+        }while (true);
     }
-     */
 
+    public double seno(double numero) {
+        radianes = conGR(numero);
+        aux = radianes;
+        t = 3;
+        auxSeno = true;
+        radianes -= (exponente(radianes,t))/factorial(t);
+        System.out.println("radianesSEXO = " + radianes);
+        do {
+            ea = errorPorcentual(radianes,aux);
+            if (auxSeno) {
+                t = t+2;
+                aux = radianes;
+                radianes += (exponente(radianes,t))/factorial(t);
+                auxSeno = false;
+                System.out.println("ea = " + ea);
+                System.out.println("radianes = " + radianes);
+            } else {
+                t = t+2;
+                aux = radianes;
+                radianes -= (exponente(radianes,t))/factorial(t);
+                auxSeno = true;
+                System.out.println("ea = " + ea);
+                System.out.println("radianes = " + radianes);
+            }
+            if (ea < es) {
+                return radianes;
+            }
+        }while(true);
+    }
     //Coseno
     public double cos(double angulo, int cs){
         System.out.printf("%-10.10s | %-30.30s | %-10.10s\n","0","1","-");
