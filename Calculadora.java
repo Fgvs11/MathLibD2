@@ -46,7 +46,7 @@ public class Calculadora{
                     do {
                         opcex = leer.nextInt();
                         if(opcex == 1 || opcex == 2){
-                            break;
+                            break ;
                         }
                         System.out.print("Opcion invalida... Ingrese un [1]Grados o [2]Radianes: ");
                     } while (true);

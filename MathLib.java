@@ -13,12 +13,12 @@ public class MathLib{
     public double exponente(double valor, int exp) {
         double resultado = 1;
 
-        for (int i = 1; i <= exp; i++){
+        for (int i = 1; i <= valorAbsoluto(exp); i++){
             resultado = resultado * valor;
         }
-       if (valor==10) {
-            return 1/ resultado;
-        }
+       if(exp < 0){
+            return 1/resultado;
+       }
         return resultado;
     }
     
@@ -34,7 +34,7 @@ public class MathLib{
     }
 
     public void errorMeta(int cifraSig) {
-        es = 0.5*(exponente(10,cifraSig-2));
+        es = 0.5*(exponente(10,-1*(cifraSig-2)));
     }
     public double errorPorcentual(double acutal, double anterior) {
         ea = ((acutal-anterior)/acutal)*100;
@@ -124,12 +124,15 @@ public class MathLib{
     }
     //Coseno
     public double cos(double angulo, int cs){
+        errorMeta(cs);
+        System.out.println(es);
         System.out.printf("%-10.10s | %-30.30s | %-10.10s\n","0","1","-");
         int n = 1;
-        errorMeta(cs);
+        
         double x = 1, xi;
         while(true){
             xi = x + exponente(-1,n) * exponente(angulo,2*n)/factorial(2*n);
+            xi = redondear(xi, cs +1 );
             Double auxcos = valorAbsoluto((valorAbsoluto(xi) - valorAbsoluto(x))/ valorAbsoluto(xi) * 100);
             System.out.printf("%-10.10s | %-30.30s | %."+cs+"f%s\n",String.valueOf(n),String.valueOf(xi),auxcos, "%");
             if(auxcos < es){
