@@ -131,7 +131,7 @@ public class MathLib{
         
         double x = 1, xi, auxh = 1000000;
         while(true){
-            xi = x + exponente(-1,n) * exponente(angulo,2*n)/factorial(2*n);
+            xi = x + (exponente(-1,n) * exponente(angulo,2*n)/factorial(2*n));
             xi = redondear(xi, cs +1 );
             Double auxcos = valorAbsoluto((valorAbsoluto(xi) - valorAbsoluto(x))/ valorAbsoluto(xi) * 100);
             if(n == 1){

@@ -42,7 +42,7 @@ public class Calculadora{
                     System.out.print("Ingrese el angulo del coseno: ");
                     int opcex;
                     double angulo = leer.nextDouble();
-                    System.out.print("En que se encuentra el angulo: [1]Grados [2]Radianes");
+                    System.out.print("En que se encuentra el angulo: [1]Grados [2]Radianes: ");
                     do {
                         opcex = leer.nextInt();
                         if(opcex == 1 || opcex == 2){
