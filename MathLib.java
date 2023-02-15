@@ -57,6 +57,15 @@ public class MathLib{
         }
         return a;
     }
+
+    public double redondear(double valor, int cs){
+        double ans =(valor * exponente(10, cs));
+        double aux = ans - (int)ans;
+        if(aux >= .5){
+            return ((int) ans + 1) * exponente(10, -cs);
+        }
+        return ((int) ans) * exponente(10, -cs);
+    }
     //Metodos de alexius
     public double raizCuadrada(double numero){
         do {
