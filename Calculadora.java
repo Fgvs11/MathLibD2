@@ -39,6 +39,21 @@ public class Calculadora{
                     System.out.println("El resultado es: " + seno);
                     break;
                 case  3: // Coseno (x)
+                    System.out.print("Ingrese el angulo del coseno: ");
+                    int opcex;
+                    double angulo = leer.nextDouble();
+                    System.out.print("En que se encuentra el angulo: [1]Grados [2]Radianes");
+                    do {
+                        opcex = leer.nextInt();
+                        if(opcex == 1 || opcex == 2){
+                            break;
+                        }
+                        System.out.print("Opcion invalida... Ingrese un [1]Grados o [2]Radianes: ");
+                    } while (true);
+                    System.out.print("Ingrese las cifras significativas deseadas: ");
+                    int cs = leer.nextInt();
+                    System.out.printf("%-10.10s | %-30.30s | %-30.30s\n","n","cos(" + angulo + ((opcex == 1)?"°)":")"),"ea");
+                    System.out.printf("El resultado es: %."+ (cs +1) +"f", math.cos(math.obtenerGrados(angulo,opcex), cs));
                     break;
                 case  4: // Tangente (x)
                     break;
