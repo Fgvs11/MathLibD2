@@ -129,11 +129,19 @@ public class MathLib{
         System.out.printf("%-10.10s | %-30.30s | %-10.10s\n","0","1","-");
         int n = 1;
         
-        double x = 1, xi;
+        double x = 1, xi, auxh = 1000000;
         while(true){
             xi = x + exponente(-1,n) * exponente(angulo,2*n)/factorial(2*n);
             xi = redondear(xi, cs +1 );
             Double auxcos = valorAbsoluto((valorAbsoluto(xi) - valorAbsoluto(x))/ valorAbsoluto(xi) * 100);
+            if(n == 1){
+                auxh = auxcos;
+            }else{
+                if(auxh < auxcos){
+                    return x;
+                }
+                auxh = auxcos;
+            }
             System.out.printf("%-10.10s | %-30.30s | %."+cs+"f%s\n",String.valueOf(n),String.valueOf(xi),auxcos, "%");
             if(auxcos < es){
                 return xi;
