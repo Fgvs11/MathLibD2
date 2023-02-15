@@ -11,7 +11,7 @@ public class MathLib{
 
     //Metodos auxiliares
     public double exponente(double valor, int exp) {
-        double resultado = 1;
+        double resultado = 1.0d;
 
         for (int i = 1; i <= valorAbsoluto(exp); i++){
             resultado = resultado * valor;
@@ -78,11 +78,15 @@ public class MathLib{
         }while(true);
     }
 
-    public double euler(double numero) {
+    public double euler(double numero, int cs) {
         resultadoEuler = 1 + numero;
         t = 2;
+        double p1,p2;
         do {
-            resultadoEuler += (exponente(numero,t))/factorial(t);
+            
+            p1 = redondear(exponente(numero,t), cs + 2);
+            p2 = redondear(exponente(numero,t),cs + 2);
+            resultadoEuler += p1/p2;
             ea = errorPorcentual(resultadoEuler,aux);
             System.out.println("ea = " + ea);
             aux = resultadoEuler;
@@ -129,15 +133,19 @@ public class MathLib{
         System.out.printf("%-10.10s | %-30.30s | %-10.10s\n","0","1","-");
         int n = 1;
         
-        double x = 1, xi, auxh = 1000000;
+        double x = 1, xi = 1, auxh = 1000000;
         while(true){
-            xi = x + (exponente(-1,n) * exponente(angulo,2*n)/factorial(2*n));
+            double p1 = exponente(-1,n);
+            double p2 = exponente(angulo,2*n);
+            double p3 = factorial(2*n);
+            xi +=(p1 * p2/p3);
             xi = redondear(xi, cs +1 );
             Double auxcos = valorAbsoluto((valorAbsoluto(xi) - valorAbsoluto(x))/ valorAbsoluto(xi) * 100);
+            
             if(n == 1){
                 auxh = auxcos;
             }else{
-                if(auxh < auxcos){
+                if(auxh < auxcos && auxcos < 0){
                     return x;
                 }
                 auxh = auxcos;

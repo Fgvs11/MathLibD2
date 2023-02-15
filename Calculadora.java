@@ -7,7 +7,7 @@ public class Calculadora{
         // Declaracion de variables-objetos
         Scanner leer = new Scanner(System.in);
         MathLib math = new MathLib();
-        int opc;
+        int opc,cs;
         double raiz, euler, seno;
 
         // Menu MathLibs
@@ -51,7 +51,7 @@ public class Calculadora{
                         System.out.print("Opcion invalida... Ingrese un [1]Grados o [2]Radianes: ");
                     } while (true);
                     System.out.print("Ingrese las cifras significativas deseadas: ");
-                    int cs = leer.nextInt();
+                    cs = leer.nextInt();
                     System.out.printf("%-10.10s | %-30.30s | %-30.30s\n","n","cos(" + angulo + ((opcex == 1)?"°)":")"),"ea");
                     System.out.printf("El resultado es: %."+ (cs +1) +"f", math.cos(math.obtenerGrados(angulo,opcex), cs));
                     break;
@@ -59,9 +59,10 @@ public class Calculadora{
                     break;
                 case  5: // e^x
                     System.out.print("Ingrese las cifras significativas deseadas: ");
-                    math.errorMeta(leer.nextInt());
+                    cs = leer.nextInt();
+                    math.errorMeta(cs);
                     System.out.print("Ingrese el exponente a calcular de e: ");
-                    euler = math.euler(leer.nextDouble());
+                    euler = math.euler(leer.nextDouble(),cs);
                     System.out.println("El resultado es: " + euler);
                     break;
                 case  6: // Ln(x)
