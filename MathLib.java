@@ -65,11 +65,13 @@ public class MathLib{
     }
     
     //Seno
-    public double seno(double numero) {
+    public double seno(double numero, int cs) {
         t = 3;
         double radianes = (numero) - (Math.pow(numero, t) / factorial(t));
         ea = errorPorcentual(radianes,aux);
         aux = radianes;
+        int n = 1;
+        System.out.printf("%-10.10s | %-30.30s | %-10.10s\n","0","1","-");
         boolean auxSeno = true;
         do {
             t = t+2;
@@ -84,9 +86,11 @@ public class MathLib{
                 aux = radianes;
                 auxSeno = true;
             }
+            System.out.printf("%-10.10s | %-30.30s | %."+cs+"f%s\n",n,radianes,ea, "%");
             if (ea < es) {
                 return radianes;
             }
+            n++;
         }while(true);
     }
 
@@ -108,10 +112,14 @@ public class MathLib{
         }
     }
     //Tangente
-    public double tan(double angulo, int cs){
-        return seno(angulo)/ cos(angulo, cs);
+    public double tan(double angulo, int cs, String aux){
+        System.out.printf("%-10.10s | %-30.30s | %-30.30s\n","n","sin(" + angulo + aux,"ea");
+        double seno = seno(angulo,cs);
+        System.out.printf("\n%-10.10s | %-30.30s | %-30.30s\n","n","cos(" + angulo + aux,"ea");
+        double cos = cos(angulo, cs);
+        return seno/cos ;
     }
-
+    //Ln(x)
     public double ln(double a, int cs){
         errorMeta(cs);
         int n = 1;
@@ -123,7 +131,7 @@ public class MathLib{
             xi = p3*p1;
             x += xi;
             double auxln = 2*Math.abs(xi / x) * 100;
-            System.out.printf("%-10.10s | %-30.30s | %."+cs+"f%s\n",n,x,auxln, "%");
+            System.out.printf("%-10.10s | %-30.30s | %."+cs+"f%s\n",n,(2*x),auxln, "%");
             if(auxln < es || a == 1){
                 return 2*x;
             }

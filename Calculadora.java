@@ -24,21 +24,21 @@ public class Calculadora{
             System.out.println("[6] Ln(x)");
             System.out.println("[7] Salir");
             System.out.print("Opcion a elegir [1-7]: ");
-            opc = leer.nextInt();
+            opc = vInt();
 
             switch (opc) {
                 case 1: // Raiz cuadrada de x
                     System.out.print("Ingrese las cifras significativas deseadas: ");
-                    math.errorMeta(leer.nextInt());
+                    math.errorMeta(vInt());
                     System.out.print("Ingrese el numero a calular: ");
-                    raiz = math.raizCuadrada(leer.nextDouble());
+                    raiz = math.raizCuadrada(vDouble());
                     System.out.println("El resultado es: " + raiz);
                     break;
                 case 2: // Seno (x)
                     msjRadianes("seno");    
                     math.errorMeta(cs);
-                    System.out.printf("%-10.10s | %-30.30s | %-30.30s\n","n","sen(" + angulo + ((opcex == 1)?"°)":")"),"ea");
-                    System.out.printf("El resultado es: %."+ (cs +1) +"f", math.seno(math.obtenerGrados(angulo, opcex)), cs);
+                    System.out.printf("%-10.10s | %-30.30s | %-30.30s\n","n","sin(" + angulo + ((opcex == 1)?"°)":")"),"ea");
+                    System.out.printf("El resultado es: %."+ (cs +1) +"f", math.seno(math.obtenerGrados(angulo, opcex),cs), cs);
                     break;
                 case  3: // Coseno (x)
                     msjRadianes("coseno");
@@ -47,21 +47,21 @@ public class Calculadora{
                     break;
                 case  4: // Tangente (x)
                     msjRadianes("tangente");
-                    System.out.printf("El resultado es: %."+ (cs +1) +"f", math.tan(math.obtenerGrados(angulo,opcex), cs));
+                    System.out.printf("El resultado es: %."+ (cs +1) +"f", math.tan(math.obtenerGrados(angulo,opcex), cs,((opcex == 1)?"°)":")")));
                     break;
                 case  5: // e^x
                     System.out.print("Ingrese las cifras significativas deseadas: ");
-                    cs = leer.nextInt();
+                    cs = vInt();
                     math.errorMeta(cs);
                     System.out.print("Ingrese el exponente a calcular de e: ");
-                    euler = math.euler(leer.nextDouble(),cs);
+                    euler = math.euler(vDouble(),cs);
                     System.out.println("El resultado es: " + euler);
                     break;
                 case  6: // Ln(x)
                     System.out.print("Ingrese el numero al que sacarle el ln: ");
-                    double x = leer.nextDouble();
+                    double x = vDouble();
                     System.out.print("Ingrese las cifras significativas deseadas: ");
-                    cs = leer.nextInt();
+                    cs = vInt();
                     System.out.printf("%-10.10s | %-30.30s | %-30.30s\n","n","ln(x)","ea");
                     System.out.printf("El resultado es: %."+ (cs +1) +"f", math.ln(x,cs), cs);
                     break;
@@ -78,16 +78,39 @@ public class Calculadora{
 
     public static void msjRadianes(String aux) {
         System.out.print("Ingrese el angulo del "+ aux +": ");
-        angulo = leer.nextDouble();
+        angulo = vDouble();
         System.out.print("En que se encuentra el angulo: [1]Grados [2]Radianes: ");
         do {
-            opcex = leer.nextInt();
+            opcex = vInt();
             if (opcex == 1 || opcex == 2) {
                 break;
             }
             System.out.print("Opcion invalida... Ingrese un [1]Grados o [2]Radianes: ");
         } while (true);
         System.out.print("Ingrese las cifras significativas deseadas: ");
-        cs = leer.nextInt();
+        cs = vInt();
+    }
+
+    public static double vDouble(){
+        while(true){
+            try {
+                String aux = leer.nextLine();
+                double ans = Double.parseDouble(aux);
+                return ans;
+            } catch (Exception e) {
+                System.out.print("Error, dato invalido... Por favor ingrese un numero con punto flotante valido: ");
+            }
+        }
+    }
+    public static int vInt(){
+        while(true){
+            try {
+                String aux = leer.nextLine();
+                int ans = Integer.parseInt(aux);
+                return ans;
+            } catch (Exception e) {
+                System.out.print("Error, dato invalido... Por favor ingrese un numero entero valido: ");
+            }
+        }
     }
 }
