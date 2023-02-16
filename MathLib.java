@@ -10,19 +10,8 @@ public class MathLib{
     private int t;
 
     //Metodos auxiliares
-    public double exponente(double valor, int exp) {
-        double resultado = 1.0d;
-
-        for (int i = 1; i <= valorAbsoluto(exp); i++){
-            resultado = resultado * valor;
-        }
-       if(exp < 0){
-            return 1/resultado;
-       }
-        return resultado;
-    }
     
-    public int factorial(int numero){
+    public double factorial(int numero){
 	   if(numero == 0){
 		   return 1;
 	   }
@@ -30,18 +19,15 @@ public class MathLib{
     }
     
     public double conGR(double grados){ //Convertir grados a radianes
-        return grados * 3.14159265358979323846264338327950288/180;
+        return grados * Math.PI/180;
     }
 
     public void errorMeta(int cifraSig) {
-        es = 0.5*(exponente(10,-1*(cifraSig-2)));
+        es = 0.5*(Math.pow(10,-1*Math.abs(cifraSig-2)));
     }
     public double errorPorcentual(double acutal, double anterior) {
-        ea = ((acutal-anterior)/acutal)*100;
-        if (ea < 0) {
-            ea = ea*-1;
-        }
-        return ea;
+        ea = (acutal-anterior/acutal)*100;
+        return Math.abs(ea);
     }
 
     public double obtenerGrados(double angulo, int opc){
@@ -51,21 +37,6 @@ public class MathLib{
         return angulo;
     }
 
-    public double valorAbsoluto(double a){
-        if(a < 0){
-            return -1 * a;
-        }
-        return a;
-    }
-
-    public double redondear(double valor, int cs){
-        double ans =(valor * exponente(10, cs));
-        double aux = ans - (int)ans;
-        if(aux >= .5){
-            return ((int) ans + 1) * exponente(10, -cs);
-        }
-        return ((int) ans) * exponente(10, -cs);
-    }
     //Metodos de alexius
     public double raizCuadrada(double numero){
         do {
@@ -81,12 +52,8 @@ public class MathLib{
     public double euler(double numero, int cs) {
         resultadoEuler = 1 + numero;
         t = 2;
-        double p1,p2;
         do {
-            
-            p1 = redondear(exponente(numero,t), cs + 2);
-            p2 = redondear(exponente(numero,t),cs + 2);
-            resultadoEuler += p1/p2;
+            resultadoEuler += Math.pow(numero,t)/Math.pow(numero,t);
             ea = errorPorcentual(resultadoEuler,aux);
             System.out.println("ea = " + ea);
             aux = resultadoEuler;
@@ -96,27 +63,28 @@ public class MathLib{
             }
         }while (true);
     }
-
+    
+    //Seno
     public double seno(double numero) {
-        radianes = conGR(numero);
+        radianes = numero;
         aux = radianes;
         t = 3;
         auxSeno = true;
-        radianes -= (exponente(radianes,t))/factorial(t);
+        radianes -= (Math.pow(radianes,t))/factorial(t);
         System.out.println("radianesSEXO = " + radianes);
         do {
             ea = errorPorcentual(radianes,aux);
             if (auxSeno) {
                 t = t+2;
                 aux = radianes;
-                radianes += (exponente(radianes,t))/factorial(t);
+                radianes += (Math.pow(radianes,t))/factorial(t);
                 auxSeno = false;
                 System.out.println("ea = " + ea);
                 System.out.println("radianes = " + radianes);
             } else {
                 t = t+2;
                 aux = radianes;
-                radianes -= (exponente(radianes,t))/factorial(t);
+                radianes -= (Math.pow(radianes,t))/factorial(t);
                 auxSeno = true;
                 System.out.println("ea = " + ea);
                 System.out.println("radianes = " + radianes);
@@ -126,36 +94,27 @@ public class MathLib{
             }
         }while(true);
     }
+
     //Coseno
     public double cos(double angulo, int cs){
         errorMeta(cs);
         System.out.println(es);
         System.out.printf("%-10.10s | %-30.30s | %-10.10s\n","0","1","-");
         int n = 1;
-        
-        double x = 1, xi = 1, auxh = 1000000;
+        double x = 1, xi;
         while(true){
-            double p1 = exponente(-1,n);
-            double p2 = exponente(angulo,2*n);
-            double p3 = factorial(2*n);
-            xi +=(p1 * p2/p3);
-            xi = redondear(xi, cs +1 );
-            Double auxcos = valorAbsoluto((valorAbsoluto(xi) - valorAbsoluto(x))/ valorAbsoluto(xi) * 100);
-            
-            if(n == 1){
-                auxh = auxcos;
-            }else{
-                if(auxh < auxcos && auxcos < 0){
-                    return x;
-                }
-                auxh = auxcos;
-            }
-            System.out.printf("%-10.10s | %-30.30s | %."+cs+"f%s\n",String.valueOf(n),String.valueOf(xi),auxcos, "%");
+            xi = (Math.pow(-1,n) * Math.pow(angulo,2*n)/factorial(2*n));
+            x += xi;
+            double auxcos = Math.abs(xi / x) * 100;
+            System.out.printf("%-10.10s | %-30.30s | %."+cs+"f%s\n",String.valueOf(n),String.valueOf(x),auxcos, "%");
             if(auxcos < es){
-                return xi;
+                return x;
             }
             n++;
-            x = xi;
         }
+    }
+    //Tangente
+    public double tan(double angulo, int cs){
+        return seno(angulo)/ cos(angulo, cs);
     }
 }
