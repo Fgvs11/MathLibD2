@@ -76,7 +76,6 @@ public class MathLib{
             System.out.printf("%-10.10s | %-30.30s | %."+cs+"f%s\n",t,aux,ea, "%");
             resultadoEuler += Math.pow(numero,t)/factorial(t);
             ea = errorPorcentual(resultadoEuler,aux);
-            //System.out.println("ea = " + ea);
             aux = resultadoEuler;
             t++;
             if (ea < es) {
