@@ -4,9 +4,6 @@ public class MathLib{
     private double ea;
     private double resulRaiz = 1;
     private double aux =1;
-    private double resultadoEuler;
-    private double radianes;
-    private boolean auxSeno;
     private int t;
 
     //Metodos auxiliares
@@ -26,7 +23,7 @@ public class MathLib{
         es = 0.5*(Math.pow(10,-1*Math.abs(cifraSig-2)));
     }
     public double errorPorcentual(double acutal, double anterior) {
-        ea = (acutal-anterior/acutal)*100;
+        ea = ((acutal-anterior)/acutal)*100;
         return Math.abs(ea);
     }
 
@@ -50,12 +47,15 @@ public class MathLib{
     }
 
     public double euler(double numero, int cs) {
-        resultadoEuler = 1 + numero;
+        double resultadoEuler = 1 + numero;
         t = 2;
+        System.out.printf("%-10.10s | %-30.30s | %-30.30s\n","n","e^(" + numero + ((numero == 1)?"°)":")"),"ea");
+        System.out.printf("%-10.10s | %-30.30s | %-10.10s\n","0","1","-");
         do {
-            resultadoEuler += Math.pow(numero,t)/Math.pow(numero,t);
+            System.out.printf("%-10.10s | %-30.30s | %."+cs+"f%s\n",t,aux,ea, "%");
+            resultadoEuler += Math.pow(numero,t)/factorial(t);
             ea = errorPorcentual(resultadoEuler,aux);
-            System.out.println("ea = " + ea);
+            //System.out.println("ea = " + ea);
             aux = resultadoEuler;
             t++;
             if (ea < es) {
@@ -66,28 +66,23 @@ public class MathLib{
     
     //Seno
     public double seno(double numero) {
-        radianes = numero;
-        aux = radianes;
         t = 3;
-        auxSeno = true;
-        radianes -= (Math.pow(radianes,t))/factorial(t);
-        System.out.println("radianesSEXO = " + radianes);
+        double radianes = (numero) - (Math.pow(numero, t) / factorial(t));
+        ea = errorPorcentual(radianes,aux);
+        aux = radianes;
+        boolean auxSeno = true;
         do {
-            ea = errorPorcentual(radianes,aux);
+            t = t+2;
             if (auxSeno) {
-                t = t+2;
+                radianes += (Math.pow(numero,t))/factorial(t);
+                ea = errorPorcentual(radianes,aux);
                 aux = radianes;
-                radianes += (Math.pow(radianes,t))/factorial(t);
                 auxSeno = false;
-                System.out.println("ea = " + ea);
-                System.out.println("radianes = " + radianes);
             } else {
-                t = t+2;
+                radianes -= (Math.pow(numero,t))/factorial(t);
+                ea = errorPorcentual(radianes,aux);
                 aux = radianes;
-                radianes -= (Math.pow(radianes,t))/factorial(t);
                 auxSeno = true;
-                System.out.println("ea = " + ea);
-                System.out.println("radianes = " + radianes);
             }
             if (ea < es) {
                 return radianes;
@@ -98,7 +93,6 @@ public class MathLib{
     //Coseno
     public double cos(double angulo, int cs){
         errorMeta(cs);
-        System.out.println(es);
         System.out.printf("%-10.10s | %-30.30s | %-10.10s\n","0","1","-");
         int n = 1;
         double x = 1, xi;
@@ -106,7 +100,7 @@ public class MathLib{
             xi = (Math.pow(-1,n) * Math.pow(angulo,2*n)/factorial(2*n));
             x += xi;
             double auxcos = Math.abs(xi / x) * 100;
-            System.out.printf("%-10.10s | %-30.30s | %."+cs+"f%s\n",String.valueOf(n),String.valueOf(x),auxcos, "%");
+            System.out.printf("%-10.10s | %-30.30s | %."+cs+"f%s\n",n,x,auxcos, "%");
             if(auxcos < es){
                 return x;
             }
@@ -126,7 +120,7 @@ public class MathLib{
             xi = 1/(2*n-1)*Math.pow((a-1)/(a+1),(2*n-1));
             x += xi;
             double auxln = 2*Math.abs(xi / x) * 100;
-            System.out.printf("%-10.10s | %-30.30s | %."+cs+"f%s\n",String.valueOf(n),String.valueOf(x),auxln, "%");
+            System.out.printf("%-10.10s | %-30.30s | %."+cs+"f%s\n",n,x,auxln, "%");
             if(auxln < es || a == 1){
                 return x;
             }
