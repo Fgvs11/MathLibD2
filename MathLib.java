@@ -31,7 +31,26 @@ public class MathLib{
 
     public double obtenerGrados(double angulo, int opc){
         if (opc == 1){
-            return conGR(angulo);
+            angulo =  conGR(angulo);
+            if(angulo < 0){
+                while(angulo < -360){
+                    angulo += 360;
+                }
+            }else{
+                while(angulo > 360){
+                    angulo -= 360;
+                }
+            }
+            return angulo;
+        }
+        if(angulo < 0){
+            while(angulo < -2*Math.PI){
+                angulo += 2*Math.PI;
+            }
+        }else{
+            while(angulo > 2*Math.PI){
+                angulo -= 2*Math.PI;
+            }
         }
         return angulo;
     }
