@@ -58,6 +58,10 @@ public class Calculadora{
                     System.out.println("El resultado es: " + euler);
                     break;
                 case  6: // Ln(x)
+                    System.out.print("Ingrese el numero al que sacarle el ln: ");
+                    int x = leer.nextInt();
+                    System.out.printf("%-10.10s | %-30.30s | %-30.30s\n","n","ln(x)","ea");
+                    System.out.printf("El resultado es: %."+ (cs +1) +"f", math.ln(x,cs), cs);
                     break;
                 case  7: // Salir
                     System.out.println("Gracias por utilizar el programa...");
