@@ -4,15 +4,17 @@ public class MathLib{
     private double ea;
     private double resulRaiz = 1;
     private double aux =1;
-    private int t;
+    private double t;
 
     //Metodos auxiliares
     
-    public double factorial(int numero){
-	   if(numero == 0){
-		   return 1;
-	   }
-	   return numero * factorial(numero - 1);
+    public double factorial(double numero){
+        double factorial = 1.0d;
+        while (numero != 0) {
+            factorial *= numero--;
+        }
+        
+        return factorial;
     }
     
     public double conGR(double grados){ //Convertir grados a radianes
@@ -70,7 +72,7 @@ public class MathLib{
         double radianes = (numero) - (Math.pow(numero, t) / factorial(t));
         ea = errorPorcentual(radianes,aux);
         aux = radianes;
-        int n = 1;
+        double n = 1;
         System.out.printf("%-10.10s | %-30.30s | %-10.10s\n","0","1","-");
         boolean auxSeno = true;
         do {
@@ -98,10 +100,11 @@ public class MathLib{
     public double cos(double angulo, int cs){
         errorMeta(cs);
         System.out.printf("%-10.10s | %-30.30s | %-10.10s\n","0","1","-");
-        int n = 1;
+        double n = 1;
         double x = 1, xi;
         while(true){
-            xi = (Math.pow(-1,n) * Math.pow(angulo,2*n)/factorial(2*n));
+            double factorial = factorial(2*n);
+            xi = Math.pow(-1,n)/factorial * Math.pow(angulo,2*n);
             x += xi;
             double auxcos = Math.abs(xi / x) * 100;
             System.out.printf("%-10.10s | %-30.30s | %."+cs+"f%s\n",n,x,auxcos, "%");
@@ -122,7 +125,7 @@ public class MathLib{
     //Ln(x)
     public double ln(double a, int cs){
         errorMeta(cs);
-        int n = 1;
+        double n = 1;
         double x = 0, xi;
         while(true){
             double p1 = Math.pow((a-1)/(a+1),(2*n-1));
