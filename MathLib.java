@@ -117,12 +117,15 @@ public class MathLib{
         int n = 1;
         double x = 0, xi;
         while(true){
-            xi = 1/(2*n-1)*Math.pow((a-1)/(a+1),(2*n-1));
+            double p1 = Math.pow((a-1)/(a+1),(2*n-1));
+            double p2 = (2*n-1);
+            double p3 = 1/p2; 
+            xi = p3*p1;
             x += xi;
             double auxln = 2*Math.abs(xi / x) * 100;
             System.out.printf("%-10.10s | %-30.30s | %."+cs+"f%s\n",n,x,auxln, "%");
             if(auxln < es || a == 1){
-                return x;
+                return 2*x;
             }
             n++;
         }

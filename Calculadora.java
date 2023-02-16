@@ -59,7 +59,9 @@ public class Calculadora{
                     break;
                 case  6: // Ln(x)
                     System.out.print("Ingrese el numero al que sacarle el ln: ");
-                    int x = leer.nextInt();
+                    double x = leer.nextDouble();
+                    System.out.print("Ingrese las cifras significativas deseadas: ");
+                    cs = leer.nextInt();
                     System.out.printf("%-10.10s | %-30.30s | %-30.30s\n","n","ln(x)","ea");
                     System.out.printf("El resultado es: %."+ (cs +1) +"f", math.ln(x,cs), cs);
                     break;
