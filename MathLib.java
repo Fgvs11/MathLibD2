@@ -32,26 +32,8 @@ public class MathLib{
     public double obtenerGrados(double angulo, int opc){
         if (opc == 1){
             angulo =  conGR(angulo);
-            if(angulo < 0){
-                while(angulo < -360){
-                    angulo += 360;
-                }
-            }else{
-                while(angulo > 360){
-                    angulo -= 360;
-                }
-            }
-            return angulo;
         }
-        if(angulo < 0){
-            while(angulo < -2*Math.PI){
-                angulo += 2*Math.PI;
-            }
-        }else{
-            while(angulo > 2*Math.PI){
-                angulo -= 2*Math.PI;
-            }
-        }
+        angulo = angulo % (2 * Math.PI);
         return angulo;
     }
 
@@ -135,6 +117,11 @@ public class MathLib{
     }
     //Tangente
     public double tan(double angulo, int cs, String aux){
+        if(angulo == Math.abs(Math.PI / 2) || angulo == Math.abs(3*Math.PI / 2)){
+            System.out.println("MATHERROR");
+            return -1;
+        }
+        errorMeta(cs);
         System.out.printf("%-10.10s | %-30.30s | %-30.30s\n","n","sin(" + angulo + aux,"ea");
         double seno = seno(angulo,cs);
         System.out.printf("\n%-10.10s | %-30.30s | %-30.30s\n","n","cos(" + angulo + aux,"ea");
@@ -143,6 +130,10 @@ public class MathLib{
     }
     //Ln(x)
     public double ln(double a, int cs){
+        if(a < 0){
+            System.out.println("MATHERROR");
+            return -1;
+        }
         errorMeta(cs);
         double n = 1;
         double x = 0, xi;

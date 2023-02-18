@@ -28,8 +28,7 @@ public class Calculadora{
 
             switch (opc) {
                 case 1: // Raiz cuadrada de x
-                    System.out.print("Ingrese las cifras significativas deseadas: ");
-                    math.errorMeta(vInt());
+                    math.errorMeta(vCs());
                     System.out.print("Ingrese el numero a calular: ");
                     raiz = math.raizCuadrada(vDouble());
                     System.out.println("El resultado es: " + raiz);
@@ -50,8 +49,7 @@ public class Calculadora{
                     System.out.printf("El resultado es: %."+ (cs +1) +"f", math.tan(math.obtenerGrados(angulo,opcex), cs,((opcex == 1)?"°)":")")));
                     break;
                 case  5: // e^x
-                    System.out.print("Ingrese las cifras significativas deseadas: ");
-                    cs = vInt();
+                    cs = vCs();
                     math.errorMeta(cs);
                     System.out.print("Ingrese el exponente a calcular de e: ");
                     euler = math.euler(vDouble(),cs);
@@ -60,8 +58,7 @@ public class Calculadora{
                 case  6: // Ln(x)
                     System.out.print("Ingrese el numero al que sacarle el ln: ");
                     double x = vDouble();
-                    System.out.print("Ingrese las cifras significativas deseadas: ");
-                    cs = vInt();
+                    cs = vCs();
                     System.out.printf("%-10.10s | %-30.30s | %-30.30s\n","n","ln(x)","ea");
                     System.out.printf("El resultado es: %."+ (cs +1) +"f", math.ln(x,cs), cs);
                     break;
@@ -87,8 +84,7 @@ public class Calculadora{
             }
             System.out.print("Opcion invalida... Ingrese un [1]Grados o [2]Radianes: ");
         } while (true);
-        System.out.print("Ingrese las cifras significativas deseadas: ");
-        cs = vInt();
+        cs = vCs();
     }
 
     public static double vDouble(){
@@ -111,6 +107,17 @@ public class Calculadora{
             } catch (Exception e) {
                 System.out.print("Error, dato invalido... Por favor ingrese un numero entero valido: ");
             }
+        }
+    }
+
+    public static int vCs(){
+        while(true){
+            System.out.print("Ingrese las cifras significativas deseadas: ");
+            int aux = vInt();
+            if(aux > 0){
+                return aux;
+            }
+            System.out.print("Numero no valido...");
         }
     }
 }
