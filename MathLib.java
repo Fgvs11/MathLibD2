@@ -116,7 +116,7 @@ public class MathLib{
     }
     //Tangente
     public double tan(double angulo, int cs, String aux){
-        if(angulo == Math.abs(Math.PI / 2) || angulo == Math.abs(3*Math.PI / 2)){
+        if(Math.abs(angulo) == (Math.PI)/ (2) || Math.abs(angulo) == (3*Math.PI)/ (2)){
             System.out.println("MATHERROR");
             return -1;
         }
