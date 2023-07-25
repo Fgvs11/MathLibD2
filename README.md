@@ -1,9 +1,8 @@
 # MathLibD2
-Calculadora Alexius hola
-Desarrollar programa MathLib para calcular:
-- Raiz cuadrada de x
-- Seno(x)
-- Coseno(x)
-- Tangente(x)
+Calculator using numeric methods:
+- Root Square
+- Sin(x)
+- Cos(x)
+- Tan(x)
 - e^x
 - ln(x)
